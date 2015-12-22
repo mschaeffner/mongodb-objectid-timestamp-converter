@@ -9,7 +9,7 @@ $(document).ready(function() {
   };
 
   var withLeadingZero = function(value) {
-    return (value <= 9)
+    return (value <= 9) ? "0" + value : value;
   };
 
   $('#objectIdInput').on('input propertychange paste', function() {
