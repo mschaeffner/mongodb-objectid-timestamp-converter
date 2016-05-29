@@ -12,8 +12,8 @@ $(document).ready(function() {
     return (value <= 9) ? "0" + value : value;
   };
 
-  $('#objectIdInput').on('input propertychange paste', function() {
-    var date = dateFromObjectId($(this).val());
+  var objectIdListener = function() {
+    var date = dateFromObjectId($('#objectIdInput').val());
 
     $('#yearInput').val(date.getFullYear());
     $('#monthInput').val(withLeadingZero(date.getMonth() + 1));
@@ -21,11 +21,9 @@ $(document).ready(function() {
     $('#hoursInput').val(withLeadingZero(date.getHours()));
     $('#minutesInput').val(withLeadingZero(date.getMinutes()));
     $('#secondsInput').val(withLeadingZero(date.getSeconds()));
+  };
 
-  });
-
-  $('#dateAndTimeForm input').on('input propertychange paste', function() {
-
+  var dateAndTimeListener = function() {
     var year = $('#yearInput').val();
     var month = $('#monthInput').val();
     var day = $('#dayInput').val();
@@ -35,9 +33,14 @@ $(document).ready(function() {
 
     var date = new Date(year, month-1, day, hours, minutes, seconds);
     var objectId = objectIdFromDate(date);
-
     $('#objectIdInput').val(objectId);
+  };
 
-  });
+  $('#objectIdInput').on('input propertychange paste', objectIdListener);
+  $('#dateAndTimeForm input').on('input propertychange paste', dateAndTimeListener);
+
+  var currentObjectId = objectIdFromDate(new Date());
+  $('#objectIdInput').val(currentObjectId);
+  objectIdListener();
 
 });
