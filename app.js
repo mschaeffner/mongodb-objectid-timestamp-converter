@@ -16,7 +16,7 @@ $(document).ready(function() {
     var date = dateFromObjectId($(this).val());
 
     $('#yearInput').val(date.getFullYear());
-    $('#monthInput').val(withLeadingZero(date.getMonth()));
+    $('#monthInput').val(withLeadingZero(date.getMonth() + 1));
     $('#dayInput').val(withLeadingZero(date.getDate()));
     $('#hoursInput').val(withLeadingZero(date.getHours()));
     $('#minutesInput').val(withLeadingZero(date.getMinutes()));
